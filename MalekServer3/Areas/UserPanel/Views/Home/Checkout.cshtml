@@ -1,0 +1,189 @@
+﻿@model IEnumerable<MalekServer3.Models.ObjectClass.OcProduct>
+
+@{
+    ViewBag.Title = "تائید نهایی";
+}
+
+<div class="clipped check-out column uk-card uk-padding uk-margin-top uk-margin-bottom uk-margin-auto">
+    <a href="/UserPanel/Home/Cart" class="uk-icon uk-position-absolute" uk-icon="icon:  arrow-left ; ratio: 2"></a>
+
+    <img class="uk-width-small uk-margin-auto" src="../../Resources/Vector/Logo.svg" />
+
+    <h4 class="uk-margin-auto-left uk-margin-remove-bottom">اتمام پرداخت</h4>
+    <p dir="rtl">
+
+
+        <h4>
+            با تشکر از خرید شما
+        </h4>
+
+        <h6 class="uk-alert">
+            لطفاً قبل از نهایی کردن سفارش، موارد ذیل را مطالعه فرمایید!
+        </h6>
+
+        <div class="column uk-margin-top" dir="rtl">
+            <h6>
+                ▪️ هزینه ارسال:
+            </h6>
+            – سفارش‌های بالای دو میلیون ریال، به صورت رایگان ارسال خواهند شد.
+            <br />
+            – سفارش‌های زیر دو میلیون ریال، به صورت پس کرایه (به عهده مشتری) ارسال خواهند شد.
+            <br />
+
+        </div>
+
+        <div class="column uk-margin-top" dir="rtl">
+            <h6>
+                ▪️ روش‌های ارسال:
+            </h6>
+            – تهران : ارسال اکسپرس با پیک
+            <br />
+            – حومه تهران : ارسال با تیپاکس و پست
+            <br />
+            – شهرستان : ارسال با تیپاکس، پست و از طریق باربری و ترمینال
+            <br />
+        </div>
+
+        <div class="column uk-margin-top" dir="rtl">
+            <h6>
+                ▪️ مدت زمان تحویل سفارشات :
+            </h6>
+            – تهران : سفارش‌هایی که تا ساعت ۱۴ ثبت گردد، همان روز و در کمتر از ۳ ساعت تحویل داده می‌شوند و سفارشاتی که بعد از ساعت ۱۴ یا در روزهای پنجشنبه، جمعه و تعطیل رسمی ثبت شوند، در اولین روز کاری ارسال خواهند شد.
+            <br />
+            – حومه تهران : در صورت ثبت سفارش تا ساعت ۱۲ روزهای کاری، کالای مورد نظر، بین ۲۴ تا ۷۲ ساعت تحویل داده خواهد شد.
+            <br />
+            – شهرستان : در صورت ثبت سفارش تا ساعت ۱۲ روزهای کاری، کالای مورد نظر، بین ۲۴ تا ۷۲ ساعت تحویل داده خواهد شد.
+            <br />
+        </div>
+        
+        <div class="column uk-margin-top" dir="rtl">
+            <h6>
+                ▪️ شرایط گارانتی و تست :
+            </h6>
+            – مهلت تست قطعات در تهران ۲۴ ساعت و در شهرستان ۴۸ ساعت بعد از دریافت کالا می‌باشد.
+            <br />
+            – قطعاتی که دارای باکس و آکبند هستند، دارای مهلت تست نمی‌باشند و شامل شرایط گارانتی شرکت گارانتی کننده هستند.
+            <br />
+        </div>
+
+        با توجه به اینکه تمامی اطلاعات، تصاویر و مشخصات کالاها به همراه قیمت‌های آنها در سایت توسط نیروی انسانی ثبت میگردند، لذا احتمال اشکال وجود دارد. در صورت وجود هرگونه اشکال در درج قیمت و ارزش ریالی کالاهای موجود در سایت ملک سرور، حق بی اثر نمودن سفارش و یا خرید انجام شده برای ملک سرور محفوظ بوده و در صورت وجود مغایرت در مشخصات کالاها، مرجع مورد استناد، سایت اصلی تولید کننده کالا می‌باشد.
+    </p>
+
+    <label class="uk-margin-top uk-margin-small-bottom">سبد خرید شما</label>
+
+    <content id="cartTable" class="cart">
+        <table class="history uk-table uk-table-striped uk-margin-small-top">
+            <thead>
+                <tr>
+                    <th>
+                        ردیف
+                    </th>
+                    @*<th>
+                            عکس
+                        </th>*@
+                    <th>
+                        کد
+                    </th>
+                    <th>
+                        نام
+                    </th>
+                    <th>
+                        دسته بندی
+                    </th>
+                    <th>
+                        فی
+                    </th>
+                    <th>
+                        تعداد
+                    </th>
+                    <th>
+                        قیمت
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody id="tBody">
+                @{
+                    int i = 1;
+                }
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>@i</td>
+                        @{
+                            i += 1;
+                        }
+
+                        <td>@item.id</td>
+                        <td>@item.Name</td>
+                        <td>@item.Catagory.Name</td>
+                        <td>@item.Price.ToString("#,0")</td>
+                        <td>@item.Count</td>
+                        <td>@item.Sum.ToString("#,0")</td>
+                    </tr>
+                }
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    @*<td></td>*@
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+                    <td>@Model.Sum(p => p.Count)</td>
+                    <td>
+                        @Model.Sum(p => p.Price * p.Count).ToString("#,0") ریال
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </content>
+
+    <label class="AddDiscount uk-margin-top uk-margin-small-bottom">کد تخفیف</label>
+    <div class="row">
+        <button onclick="AddDiscount()" class="AddDiscount uk-button uk-button-primary uk-margin-auto-left uk-margin-right">
+            <span>اعمال</span>
+            @*<span class="uk-icon" uk-icon="icon: refresh"></span>*@
+        </button>
+        <input class="AddDiscount uk-input uk-width-small " id="DiscountName" type="text" placeholder="..." value="" />
+    </div>
+
+    <label class="uk-margin-top uk-margin-small-bottom">0 هزینه ارسال</label>
+    <div class="row uk-label  uk-margin-auto-left uk-padding-small">
+        <span class="uk-margin-small-right uk-margin-auto-left">ریال</span>
+        @{
+            //var Maliyat = Model.Sum(p => p.Price * p.Count) * 109 / 100;
+            var Maliyat = Model.Sum(p => p.Price * p.Count).ToString("#,0");
+        }
+
+        <span id="FinalPrice"> @Model.Sum(p => p.Price * p.Count).ToString("#,0") جمع کل   </span>
+        <input type="hidden" id="FinalPricehid" name="FinalPricehid" value="@Model.Sum(p => p.Price * p.Count)" />
+    </div>
+
+    <hr class="uk-divider-icon uk-margin-top uk-margin-bottom" />
+    <form action="/UserPanel/Pardakht/Payment" method="post">
+        <input type="hidden" id="Discount" name="Discount" value="0" />
+        <input type="hidden" id="DiscountId" name="DiscountId" value="0" />
+        <input type="hidden" id="ClientId" name="ClientId" value="@User.Identity.Name.Split('|')[1]" />
+        <input type="hidden" id="SumFactor" name="SumFactor" value="@Model.Sum(p => p.Price * p.Count)" />
+        <div class="row">
+            <a href="/Home/Index" class="uk-margin-auto-left uk-margin-top uk-button uk-button-danger uk-margin-right ">برگشت</a>
+            <button class="uk-margin-top uk-button uk-button-primary">درگاه خرید</button>
+        </div>
+    </form>
+
+</div>
+
+<div class="space"></div>
+
+@section Scripts{
+    <script src="~/Scripts/UserPanel/Checkout.js"></script>
+
+}
+
+
+

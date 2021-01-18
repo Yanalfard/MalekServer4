@@ -1,0 +1,33 @@
+﻿@model IEnumerable<MalekServer3.Models.ViewModel.ShopCartViewModel>
+<div class="cart-items">
+    <div class="cart-items-inner">
+        @foreach (var item in Model)
+        {
+            <div class="media">
+                <a class="pull-right" href="#"><img class="media-object item-image" src="~/Resources/Images/@item.ImageName" alt=""></a>
+                <p class="pull-left item-price">@item.Price.ToString("#,0") ریال</p>
+                <div class="media-body">
+                    <h4 class="media-heading item-title"><a href="#">@item.Title</a></h4>
+                </div>
+            </div>
+        }
+
+
+        <div class="media">
+            <p class="pull-left item-price">@Model.Sum(p => p.Price).ToString("#,0") ریال</p>
+            <div class="media-body">
+                <h4 class="media-heading item-title summary">جمع کل</h4>
+            </div>
+        </div>
+        <div class="media">
+            <div class="media-body">
+                <div>
+                    <a href="index.html#" class="btn btn-theme btn-theme-dark" data-dismiss="modal">بستن</a>
+                    <!--
+                -->
+                    <a href="/ShopCart" class="btn btn-theme btn-theme-transparent btn-call-checkout">مشاهده فاکتور </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

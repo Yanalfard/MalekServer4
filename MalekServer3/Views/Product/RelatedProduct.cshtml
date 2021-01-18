@@ -1,0 +1,10 @@
+﻿@model IEnumerable<MalekServer3.Models.ObjectClass.OcProduct>
+<div class="featured-products-carousel">
+    <div class="owl-carousel" id="featured-products-carousel">
+        @foreach (var item in Model)
+        {
+            @Html.Partial("_ProductCarousel", item)
+        }
+    </div>
+</div>
+

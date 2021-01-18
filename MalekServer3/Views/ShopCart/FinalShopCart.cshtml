@@ -1,0 +1,129 @@
+﻿
+@{
+    ViewBag.Title = "فاکتور";
+}
+
+<!-- PAGE -->
+<section class="page-section color">
+    <div class="container lead" id="showOrder">
+        <h2 class="h3 uk-margin-auto-left uk-margin-remove-bottom text-center">اتمام پرداخت</h2>
+        <p dir="rtl">
+
+            <h4 class=" h1 text-center ">
+                با تشکر از خرید شما
+            </h4>
+            <br />
+            <h5 class="column alert alert-warning">
+                لطفاً قبل از نهایی کردن سفارش، موارد ذیل را مطالعه فرمایید!
+            </h5>
+
+            <div class="column" dir="rtl">
+                <h6 class="h2 column">
+                    ▪️ هزینه ارسال
+                </h6>
+                – کلیه سفارش ها بصورت پس کرایه(به عهده مشتری) ارسال خواهند شد
+                <br />
+
+            </div>
+            <br />
+            <div class="column" dir="rtl">
+                <h6 class="h2 column">
+                    ▪️ روش‌های ارسال
+                </h6>
+                – تهران : ارسال اکسپرس با پیک
+                <br />
+                – حومه تهران : ارسال با تیپاکس و پست
+                <br />
+                – شهرستان : ارسال با تیپاکس، پست و از طریق باربری و ترمینال
+            </div>
+            <br />
+
+            <div class="column" dir="rtl">
+                <h6 class="h2 column">
+                    ▪️ مدت زمان تحویل سفارشات
+                </h6>
+                – تهران : سفارش‌هایی که تا ساعت ۱۴ ثبت گردد، همان روز و در کمتر از ۳ ساعت تحویل داده می‌شوند و سفارشاتی که بعد از ساعت ۱۴ یا در روزهای پنجشنبه، جمعه و تعطیل رسمی ثبت شوند، در اولین روز کاری ارسال خواهند شد.
+                <br />
+                – حومه تهران : در صورت ثبت سفارش تا ساعت ۱۲ روزهای کاری، کالای مورد نظر، بین ۲۴ تا ۷۲ ساعت تحویل داده خواهد شد.
+                <br />
+                – شهرستان : در صورت ثبت سفارش تا ساعت ۱۲ روزهای کاری، کالای مورد نظر، بین ۲۴ تا ۷۲ ساعت تحویل داده خواهد شد.
+            </div>
+            <br />
+
+            <div class="column margin-top" dir="rtl">
+                <h6 class="h2 column">
+                    ▪️ شرایط گارانتی و تست
+                </h6>
+                – مهلت تست قطعات در تهران ۲۴ ساعت و در شهرستان ۴۸ ساعت بعد از دریافت کالا می‌باشد.
+                <br />
+                – قطعاتی که دارای باکس و آکبند هستند، دارای مهلت تست نمی‌باشند و شامل شرایط گارانتی شرکت گارانتی کننده هستند.
+            </div>
+            <br />
+
+            با توجه به اینکه تمامی اطلاعات، تصاویر و مشخصات کالاها به همراه قیمت‌های آنها در سایت توسط نیروی انسانی ثبت میگردند، لذا احتمال اشکال وجود دارد. در صورت وجود هرگونه اشکال در درج قیمت و ارزش ریالی کالاهای موجود در سایت ملک سرور، حق بی اثر نمودن سفارش و یا خرید انجام شده برای ملک سرور محفوظ بوده و در صورت وجود مغایرت در مشخصات کالاها، مرجع مورد استناد، سایت اصلی تولید کننده کالا می‌باشد.
+        </p>
+    </div>
+</section>
+
+
+
+<section class="page-section color">
+    <div class="container" id="showOrders">
+        @Html.Action("Order")
+    </div>
+</section>
+<!-- /PAGE -->
+<!-- /PAGE -->
+
+<script>
+    function commandOrder(id, count) {
+        $.ajax({
+            url: "/ShopCart/CommandOrder/" + id,
+            type: "Get",
+            data: { count: count }
+        }).done(function (res) {
+            $("#showOrders").html(res);
+            countShopCart();
+            updateShopCart();
+        });
+    }
+
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    function AddDiscount() {
+        if ($("#DiscountName").val() == "") {
+            alert(' کد تخفیف خالیست');
+            return false;
+        }
+        $.ajax({
+            url: "/ShopCart/CheckDiscount/",
+            type: "POST",
+            data: {
+                name: $("#DiscountName").val(),
+            },
+            success: function (response) {
+                if (response.success) {
+                    alert("کد تخفیف موجود نیست");
+                    //var NumberPrice = $('#PriceSum').val();
+                    //var price = parseInt(NumberPrice);
+                    //var percent = parseInt(response.responseText);
+                    //var final = price - Math.floor((price * percent) / 100);
+                    //$('#FinalPricehid').html(numberWithCommas(final));
+                    //$('#PriceSum').val(final);
+                    //$('#Discount').val(percent);
+                    //$('#listCompare').html(response);
+                    //$('.AddDiscount').hide();
+                } else {
+                    $('#showOrders').html(response);
+                    $('#DiscountName').val("");
+                    $('.AddDiscount').hide();
+                }
+            },
+            error: function (response) {
+                alert("کد تخفیف موجود نیست");
+            }
+        });
+    }
+</script>

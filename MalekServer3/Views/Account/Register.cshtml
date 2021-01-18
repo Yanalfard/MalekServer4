@@ -1,0 +1,97 @@
+﻿@model MalekServer3.Models.ViewModel.RegisterViewModle
+
+@{
+    ViewBag.Title = "ثبت نام";
+}
+<!-- PAGE -->
+<section class="page-section color">
+    <div class="container">
+        <div class="row">
+            <h3 class="block-title"><span>ثبت نام</span></h3>
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-login" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="col-md-6">
+                    <div class="row text-center">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "نام " } })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.IdentificationNo, new { htmlAttributes = new { @class = "form-control", placeholder = "کد ملی" } })
+                                @Html.ValidationMessageFor(model => model.IdentificationNo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.TellNo, new { htmlAttributes = new { @class = "form-control", placeholder = "شماره تلفن" } })
+                                @Html.ValidationMessageFor(model => model.TellNo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", placeholder = "نام کاربری" } })
+                                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "ایمیل " } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="row text-center">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", placeholder = "آدرس" } })
+                                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "کلمه عبور" } })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.RePassword, new { htmlAttributes = new { @class = "form-control", placeholder = "تکرار کلمه عبور" } })
+                                @Html.ValidationMessageFor(model => model.RePassword, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <!-- Site -->
+                                <div class="g-recaptcha center uk-margin-small-bottom" data-sitekey="6LevZMIZAAAAAAp_NimdDiJ7wU6SCAIUHFI8-M_f"></div>
+                                <!-- localhost -->
+                                @*<div class="g-recaptcha center uk-margin-small-bottom" data-sitekey="6Ld_XsIZAAAAAD5pg4pDXJWD93von5OYhbai1zma"></div>*@
+
+                                <span class=" uk-text-danger">@ViewBag.Message</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <input type="submit" value="ثبت نام" class="btn btn-primary btn-theme btn-block" />
+                        </div>
+                    </div>
+
+                </div>
+
+            }
+
+
+        </div>
+    </div>
+</section>
+<!-- /PAGE -->

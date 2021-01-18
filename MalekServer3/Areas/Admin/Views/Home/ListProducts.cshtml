@@ -1,0 +1,52 @@
+﻿@model IEnumerable<MalekServer3.Models.TblProduct>
+@foreach (var item in Model)
+{
+<tr class=" list-item">
+    <td id="id">@item.id</td>
+    <td>@item.Name</td>
+    <td>@item.Price.ToString("#,0")</td>
+    <td style="width:100px;">
+        <form>
+            <input type="tel" class="uk-input" id="price_@(item.id)" value="@item.Price" />
+            <a onclick="updatePrice(@item.id)" class="uk-button uk-button-primary uk-button-small">ذخیره</a>
+        </form>
+    </td>
+    <td>@item.Discount%</td>
+    <td style="width:50px;">
+        <form>
+            <input type="tel" class="uk-input" id="discount_@(item.id)" value="@item.Discount" />
+            <a onclick="updateDiscount(@item.id)" class="uk-button uk-button-primary uk-button-small">ذخیره</a>
+        </form>
+    </td>
+    <td>@item.Raiting</td>
+    <td style="width:50px;">
+        <form>
+            <input type="tel" class="uk-input" id="raiting_@(item.id)" value="@item.Raiting" />
+            <a onclick="updateRaiting(@item.id)" class="uk-button uk-button-primary uk-button-small">ذخیره</a>
+        </form>
+    </td>
+    <td>@item.DateSubmited.ToShamsi()</td>
+    <td>@item.Count</td>
+    <td style="width:50px;">
+        <form>
+            <input type="tel" class="uk-input" id="count_@(item.id)" value="@item.Count" />
+            <a onclick="updateCount(@item.id)" class="uk-button uk-button-primary uk-button-small">ذخیره</a>
+        </form>
+    </td>
+    <td>
+        <a href="/Admin/Home/Gallery/@item.id" uk-icon="icon: image">گالری محصول</a>
+    </td>
+    <td>
+        <a href="/Admin/Home/Property/@item.id">ویژگی های محصول</a>
+    </td>
+    <td>
+        <a href="/Admin/Home/EditProduct/@item.id" uk-icon="icon: file-edit"></a>
+    </td>
+    <td>
+        <a onclick="DeleteProduct(@item.id)" href="#" uk-icon="icon: trash"></a>
+    </td>
+
+</tr>
+}
+
+

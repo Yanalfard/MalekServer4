@@ -1,0 +1,46 @@
+﻿@model MalekServer3.Models.ObjectClass.OcProduct
+
+
+<div class="thumbnail no-border no-padding">
+    <div class="media">
+        <a class="media-link" data-gal="prettyPhoto" href="~/Resources/Images/@Model.images[0].Image">
+            <img src="~/Resources/Images/@Model.images[0].Image" alt="" />
+            <span class="icon-view"><strong><i class="fa fa-eye"></i></strong></span>
+        </a>
+    </div>
+    <div class="caption text-center">
+        <h4 class="caption-title"><a style="font-family:'BYekan+ Bold';" href="/ViewProduct/@Model.id/@Model.Name.Replace(" ","-")">@Model.Name</a></h4>
+        <div class="rating">
+            @{
+                decimal raiting = Math.Round((decimal)Model.Raiting / 20);
+            }
+            @for (int i = 0; i < 5 - raiting; i++)
+            {
+                <span class="star"></span>
+            }
+            @for (int i = 0; i < raiting; i++)
+            {
+                <span class="star active"></span>
+            }
+
+        </div>
+        @if (Model.Discount != 0)
+        {
+            <div class="price"><ins>@Model.AfterDiscount.ToString("#,0") ریال</ins> <del>@Model.Price.ToString("#,0") ریال</del></div>
+        }
+        else
+        {
+            <div class="price"><ins>@Model.Price.ToString("#,0") ریال</ins> </div>
+        }
+        <div class="buttons">
+            @if (Model.Count > 0)
+            {
+                <a onclick="AddToCart(@Model.id)" class="btn btn-theme btn-theme-transparent btn-icon-left" href="#"><i class="fa fa-shopping-cart"></i>اضافه کردن به سبد</a>
+            }
+            else
+            {
+                <a class="btn btn-theme btn-theme-transparent btn-icon-left disabled" href="#"><i class="fa fa-shopping-cart"></i>ناموجود</a>
+            }
+        </div>
+    </div>
+</div>

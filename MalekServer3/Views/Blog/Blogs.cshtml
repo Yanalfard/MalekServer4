@@ -1,0 +1,84 @@
+﻿@model IEnumerable<MalekServer3.Models.TblBlog>
+@{
+    ViewBag.Title = "مقاله ها";
+}
+
+<!-- BREADCRUMBS -->
+<section class="page-section breadcrumbs">
+    <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="/">خانه</a></li>
+            <li><a href="#">مقاله ها</a></li>
+            <li class="active">     </li>
+        </ul>
+    </div>
+</section>
+<!-- /BREADCRUMBS -->
+<!-- PAGE WITH SIDEBAR -->
+<style>
+
+    #content img {
+        display: block;
+        margin: 0 auto !important;
+        max-height: 100% !important;
+    }
+</style>
+<section class="page-section with-sidebar">
+    <div class="container">
+        <div class="row">
+            <!-- CONTENT -->
+            <div class="col-md-12 content list-wrapper" id="content">
+
+                @foreach (var item in Model)
+                {
+                    <!-- Blog posts -->
+                    <article class="post-wrap list-item">
+                        <div class="post-media">
+                            <a href="~/Resources/Images/@item.MainImage" data-gal="prettyPhoto"><img style="max-width:700px" src="~/Resources/Images/@item.MainImage" alt=""></a>
+                        </div>
+                        <div class="post-header">
+                            <h2 class="post-title"><a href="#">عنوان مطالب وبلاگ در اینجا قرار خواهد گرفت</a></h2>
+                        </div>
+
+                        <div class="post-footer">
+                            <span class="post-read-more"><a href="/Blog/@item.id/@item.Title.Replace(" ","-")" class="btn btn-theme btn-theme-transparent btn-icon-left"><i class="fa fa-file-text-o"></i>ادامه مطلب</a></span>
+                        </div>
+                    </article>
+                    <!-- / -->
+                }
+
+
+            </div>
+            <!-- /CONTENT -->
+
+        </div>
+    </div>
+</section>
+<!-- /PAGE WITH SIDEBAR -->
+
+<div id="pagination-container"></div>
+<link href="~/Content/MvcCss/Paging.css" rel="stylesheet" />
+
+@section Scripts{
+    <script src="~/Scripts/PagingJs/jquery.simplePagination.js"></script>
+    <script src="~/Scripts/MvcJs/Paging.js"></script>
+
+    <script>
+        // jQuery Plugin: http://flaviusmatis.github.io/simplePagination.js/
+        var items = $(".list-wrapper .list-item");
+        var numItems = items.length;
+        var perPage = 12;
+        items.slice(perPage).hide();
+        $('#pagination-container').pagination({
+            items: numItems,
+            itemsOnPage: perPage,
+            prevText: "&laquo;",
+            nextText: "&raquo;",
+            onPageClick: function (pageNumber) {
+                var showFrom = perPage * (pageNumber - 1);
+                var showTo = showFrom + perPage;
+                items.hide().slice(showFrom, showTo).show();
+            }
+        });
+    </script>
+}

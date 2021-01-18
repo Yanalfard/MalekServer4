@@ -1,0 +1,6 @@
+﻿
+@model IEnumerable<MalekServer3.Models.TblCatagory>
+@foreach (var item in Model)
+{
+    <li><a href="/Products/@item.id/@item.Name.Replace(" ","-")">@item.Name</a></li>
+}

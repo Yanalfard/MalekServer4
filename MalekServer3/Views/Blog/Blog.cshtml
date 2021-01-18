@@ -1,0 +1,58 @@
+﻿@model MalekServer3.Models.TblBlog
+@{
+    ViewBag.Title = ViewBag.Name;
+}
+
+
+<!-- BREADCRUMBS -->
+<section class="page-section breadcrumbs">
+    <div class="container">
+
+        <ul class="breadcrumb">
+            <li><a href="/">خانه</a></li>
+            <li><a href="/Blogs">مقاله ها</a></li>
+
+            <li><a href="#"> مقاله @ViewBag.Name </a></li>
+            <li class="active">     </li>
+        </ul>
+    </div>
+</section>
+<!-- /BREADCRUMBS -->
+<!-- PAGE WITH SIDEBAR -->
+<section class="page-section with-sidebar">
+    <div class="container">
+        <div class="row">
+
+            <!-- CONTENT -->
+            <div class="col-md-12 content" id="content">
+                <style>
+
+                    #item-description img {
+                        display: block;
+                        margin: 0 auto !important;
+                        max-height: 100% !important;
+                    }
+                </style>
+                <!-- Blog post -->
+                <article class="post-wrap post-single">
+                    <div class="post-media" id="item-description">
+                        <a href="~/Resources/Images/@Model.MainImage" data-gal="prettyPhoto"><img style="max-width:700px" src="~/Resources/Images/@Model.MainImage" alt=""></a>
+                    </div>
+                    <div class="post-header">
+                        <h2 class="post-title"><a href="#">@Model.Title </a></h2>
+                    </div>
+                    <div class="post-body">
+                        @Html.Raw(Model.Body)
+                    </div>
+                </article>
+                <!-- /Blog post -->
+
+     
+
+            </div>
+            <!-- /CONTENT -->
+
+        </div>
+    </div>
+</section>
+<!-- /PAGE WITH SIDEBAR -->

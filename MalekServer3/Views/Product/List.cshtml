@@ -1,0 +1,40 @@
+﻿<div class="container">
+
+    <div class="tabs">
+        <ul id="tabs" class="nav nav-justified-off">
+            <!--
+            -->
+            <li class=""><a href="index.html#tab-1" onclick="newProduct(1)" data-toggle="tab">محصولات جدید</a></li>
+            <!--
+            -->
+            <li class="active"><a href="index.html#tab-2" onclick="suggestionProduct()" data-toggle="tab">محصولات ویژه</a></li>
+            <!--
+            -->
+            <li class=""><a href="index.html#tab-3" onclick="mostProduct(2)" data-toggle="tab"> محصولات پیشنهادی</a></li>
+        </ul>
+    </div>
+
+    <div class="tab-content" id="listProduct">
+        @Html.Action("listProduct")
+    </div>
+
+</div>
+
+
+<script>
+    function suggestionProduct() {
+        $.get('/Product/ListProduct', function (result) {
+            $('#listProduct').html(result);
+        });
+    }
+    function newProduct(id) {
+        $.get('/Product/ListProduct/' + id, function (result) {
+            $('#listProduct').html(result);
+        });
+    }
+    function mostProduct(id) {
+        $.get('/Product/ListProduct/' + id, function (result) {
+            $('#listProduct').html(result);
+        });
+    }
+</script>

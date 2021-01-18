@@ -1,0 +1,25 @@
+﻿@model IEnumerable<MalekServer3.Models.TblAd>
+<section class="page-section no-padding slider">
+    <div class="container full-width">
+
+        <div class="main-slider">
+            <div class="owl-carousel" id="main-slider">
+                @foreach (var item in Model)
+                {
+                    <a href="@item.Link" class="item slide2 alt">
+                        <img class="slide-img"  style="max-height:600px;" src="~/Resources/Images/@item.Image" alt="" />
+                        <div class="caption">
+                            <div class="container">
+                                <div class="div-table">
+                                    <div class="div-cell">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+</section>

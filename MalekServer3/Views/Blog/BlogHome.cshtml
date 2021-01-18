@@ -1,0 +1,16 @@
+﻿@model IEnumerable<MalekServer3.Models.TblBlog>
+@foreach (var item in Model)
+{
+    <div class="col-md-6">
+        <div class="recent-post">
+            <div class="media">
+                <a class="pull-right " href="/Blog/@item.id/@item.Title.Replace(" ","-")">
+                    <img class="media-object" style="max-height:150px;" src="~/Resources/Images/@item.MainImage" alt="">
+                </a>
+                <div class="media-body">
+                    <h4 class="media-heading"><a href="index.html#">@item.Title</a></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+}

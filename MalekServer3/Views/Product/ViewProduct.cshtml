@@ -1,0 +1,285 @@
+﻿@using MalekServer3.Models.ViewModel
+@model MalekServer3.Models.ObjectClass.OcProduct
+@{
+    ViewBag.Title = ViewBag.name;
+}
+<link href="~/Styles/Star.css" rel="stylesheet" />
+<!-- PAGE -->
+<section class="page-section">
+    <div class="container">
+
+        <div class="row product-single">
+            <div class="col-md-6">
+
+                <div class="owl-carousel img-carousel">
+                    @if (Model.images.Count != 0)
+                    {
+                        foreach (var item in Model.images)
+                        {
+                            <div class="item">
+                                <a class="btn " href="~/Resources/Images/@item.Image"></a>
+                                <a href="~/Resources/Images/@item.Image" data-gal="prettyPhoto"><img class="@Model.Name" src="~/Resources/Images/@item.Image" alt="" /></a>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="item">
+                            <a class="btn " href="~/Resources/Images/NoImg.svg"></a>
+                            <a href="~/Resources/Images/NoImg.svg" data-gal="prettyPhoto"><img class="@Model.Name" src="~/Resources/Images/NoImg.svg" alt="" /></a>
+                        </div>
+                    }
+
+
+                </div>
+                <div class="row product-thumbnails">
+                    @if (Model.images.Count != 0)
+                    {
+                        foreach (var item in Model.images)
+                        {
+                            <div class="col-xs-2 col-sm-2 col-md-3">
+                                <a class="btn " href="~/Resources/Images/@item.Image"></a>
+                                <a href="~/Resources/Images/@item.Image" data-gal="prettyPhoto"><img class="@Model.Name" src="~/Resources/Images/@item.Image" alt="" /></a>
+                            </div>
+
+                        }
+                    }
+                </div>
+            </div>
+            <div class="col-md-6">
+
+                <h2 style="font-family:'BYekan+ Bold';" class="product-title">@Model.Name</h2>
+                <div class="product-rating clearfix">
+                    <div class="rating">
+                        @{
+                            decimal raiting = Math.Round((decimal)Model.Raiting / 20);
+                        }
+                        @for (int i = 0; i < 5 - raiting; i++)
+                        {
+                            <span class="star"></span>
+                        }
+                        @for (int i = 0; i < raiting; i++)
+                        {
+                            <span class="star active"></span>
+                        }
+
+                    </div>
+                </div>
+                <div class="product-availability">موجودی: <strong>در انبار</strong> @Model.Count عدد</div>
+                <hr class="page-divider small" />
+
+                @if (Model.Discount != 0)
+                {
+                    <div class="product-price" style="color:red;">@Model.AfterDiscount.ToString("#,0") ریال <del style="color:black;">@Model.Price.ToString("#,0") ریال</del></div>
+                }
+                else
+                {
+                    <div class="product-price">@Model.Price.ToString("#,0") ریال </div>
+                }
+                <hr class="page-divider" />
+
+
+                <div class="buttons">
+
+                    @if (Model.Count > 0)
+                    {
+                        <button onclick="AddToCart(@Model.id)" class="btn btn-theme btn-cart btn-icon-left" type="submit"><i class="fa fa-shopping-cart"></i>اضافه کردن به سبد</button>
+                    }
+                    else
+                    {
+                        <button class="btn btn-theme btn-cart btn-icon-left disabled" type="submit"><i class="fa fa-shopping-cart"></i>ناموجود</button>
+                    }
+                </div>
+
+                <hr class="page-divider small" />
+
+                <table>
+                    <tr>
+                        <td class="title">دسته بندی:</td>
+                        <td>@Model.Catagory.Name</td>
+                    </tr>
+                    <tr>
+                        <td class="title">کد محصول:</td>
+                        <td>@Model.id</td>
+                    </tr>
+                    <tr>
+                        <td class="title">برچسپ ها:</td>
+                        <td>
+                            @Model.AllKeywords
+                        </td>
+                    </tr>
+                </table>
+                <section class="page-section">
+                    <div class="container" style="width:100%;height:100%;">
+                        @Html.Action("AdsRow4", "Ads")
+                    </div>
+                </section>
+                <hr class="page-divider small" />
+
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+
+
+
+<!-- PAGE -->
+<section class="page-section">
+    <div class="container">
+        <div class="tabs-wrapper content-tabs">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="product-details.html#item-description" data-toggle="tab">توضیحات محصول</a></li>
+                <li><a href="product-details.html#item-details" data-toggle="tab">مشخصات فنی </a></li>
+                <li><a href="product-details.html#reviews" data-toggle="tab">نظرات (@Model.Comments.Where(i => i.IsValid).Count())</a></li>
+            </ul>
+            <style>
+
+                #item-description img {
+                    display: block;
+                    margin: 0 auto !important;
+                    max-width: 100% !important;
+                    max-height: 100% !important;
+                }
+            </style>
+            <div class="tab-content">
+                <div class="tab-pane fade in active" id="item-description">
+                    @Html.Raw(Model.DescriptionHtml)
+                </div>
+                <div class="tab-pane fade in " id="item-details">
+                    <!-- PAGE -->
+                    <section class="page-section">
+                        <div class="container">
+
+                            <div class="row product-single">
+
+                                <table class="table table-striped">
+                                    <thead>
+
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th style="float:left">اطلاعات</th>
+                                            <th>مشخصات</th>
+                                        </tr>
+                                        @if (Model.Properties.Count != 0)
+                                        {
+                                            foreach (var item in Model.Properties)
+                                            {
+                                                <tr>
+                                                    <td style="float:left;text-align:left;">@item.Name</td>
+                                                    <td>: @item.Description</td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </section>
+
+                    <!-- /PAGE -->
+                </div>
+
+                <div class="tab-pane fade" id="reviews">
+
+                    <div class="comments">
+
+
+                        @if (Model.Comments.Count() != 0)
+                        {
+                            foreach (var item in Model.Comments)
+                            {
+                                if (item.IsValid == true)
+                                {
+
+                                    <div class="media comment">
+
+                                        <div class="media-body" style="display:flex;flex-direction:column">
+                                            <p class="comment-meta">
+                                                <span class="comment-author">
+                                                    <span class="comment-date ">
+                                                        @item.Date.ToShamsi()
+                                                    </span>
+                                                    <a href="#">@item.TblClient.Name </a>
+
+                                                </span>
+                                            </p>
+                                            <p class="comment-text">
+                                                @item.Body
+                                            </p>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+
+
+                    </div>
+
+                    <link href="~/Style/assets/css/Stars.css" rel="stylesheet" />
+                    <div class="comments-form">
+                        <h4 class="block-title">اضافه کردن نظر</h4>
+                        <form method="post" action="/Comment/AddComment" name="comments-form" id="comments-form">
+
+                            <div class="form-group"><input type="hidden" name="id" value="@Model.id"></div>
+                            <div class="form-group"><input type="hidden" name="raiting" class="HideStatusId" value="3"></div>
+                            <div class="form-group"><textarea placeholder="نظر شما" class="form-control" title="comments-form-comments" name="comment"></textarea></div>
+                            <div class="row star-container" style="margin:0;">
+                                <span class="star-cb-group">
+                                    <input type="radio" id="rating-5" class="radioName" name="rating" value="5" /><label for="rating-5">5</label>
+                                    <input type="radio" id="rating-4" class="radioName" name="rating" value="4" checked="checked" /><label for="rating-4">4</label>
+                                    <input type="radio" id="rating-3" class="radioName" name="rating" value="3" /><label for="rating-3">3</label>
+                                    <input type="radio" id="rating-2" class="radioName" name="rating" value="2" /><label for="rating-2">2</label>
+                                    <input type="radio" id="rating-1" class="radioName" name="rating" value="1" /><label for="rating-1">1</label>
+                                </span>
+                            </div>
+                            <div class="form-group"><button type="submit" class="btn btn-theme btn-theme-transparent btn-icon-left" id="submit"><i class="fa fa-comment"></i> ثبت نظر</button></div>
+
+                        </form>
+                    </div>
+
+
+                    <!-- // -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /PAGE -->
+
+
+<section class="page-section">
+    <div class="container">
+        @Html.Action("AdsRow5", "Ads")
+    </div>
+</section>
+<!-- PAGE -->
+<section class="page-section">
+    <div class="container">
+        <h2 class="section-title section-title-lg"><span>محصولات مرتبط</span></h2>
+        @Html.Action("RelatedProduct")
+        <hr class="page-divider half" />
+        <a class="btn btn-theme btn-view-more-block" href="/Products/@Model.CatagoryId/@Model.Catagory.Name.Replace(" ","-")" style="max-width: 100%;">دیدن بیشتر</a>
+    </div>
+</section>
+<!-- /PAGE -->
+
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('.radioName').click(function () {
+                var NameChose = $('input[name=rating]:checked').val();
+                $('.HideStatusId').val($('input[name=rating]:checked').val());
+            });
+        });
+    </script>
+
+}

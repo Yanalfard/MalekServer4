@@ -1,0 +1,88 @@
+﻿
+@{
+    ViewBag.Title = "ملک سرور- فروش سرور hp ";
+    Layout = "~/Views/Shared/_LayoutDefault.cshtml";
+}
+<!-- PAGE -->
+
+@Html.Action("Slider", "Ads")
+
+<!-- /PAGE -->
+<!-- PAGE -->
+<section class="page-section">
+    <div class="container">
+        <div class="row">
+            @Html.Action("Slider2", "Ads")
+            @Html.Action("Slider3", "Ads")
+        </div>
+    </div>
+</section>
+<!-- /PAGE -->
+<!-- PAGE -->
+<section class="page-section">
+    @Html.Action("List", "Product")
+</section>
+<!-- /PAGE -->
+<!-- PAGE -->
+
+<section class="page-section">
+    <div class="container">
+        @Html.Action("AdsRow1", "Ads")
+    </div>
+</section>
+<!-- /PAGE -->
+<!-- PAGE -->
+@Html.Action("IsOnFirstPage", "Product")
+<!-- /PAGE -->
+
+<section class="page-section">
+    <div class="container">
+        @Html.Action("AdsRow2", "Ads")
+    </div>
+</section>
+<!-- PAGE -->
+<section class="page-section">
+    <div class="container">
+        <a class="btn btn-theme btn-title-more btn-icon-left" href="/Blogs#"><i class="fa fa-file-text-o"></i>دیدن همه مقاله ها</a>
+        <h2 class="block-title"><span>مقاله   </span></h2>
+        <div class="row">
+            @Html.Action("BlogHome", "Blog")
+        </div>
+    </div>
+</section>
+
+<!-- /PAGE -->
+<!-- PAGE -->
+<section class="page-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="product-list">
+                    <a class="btn btn-theme btn-title-more" href="/Products/-3">دیدن همه</a>
+                    <h4 class="block-title"><span>محصولات پیشنهادی</span></h4>
+                    @Html.Action("MostPriceProducts", "Product")
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="product-list">
+                    <a class="btn btn-theme btn-title-more" href="/Products/-4">دیدن همه</a>
+                    <h4 class="block-title"><span>محصولات پرطرفدار</span></h4>
+                    @Html.Action("LikeProducts", "Product")
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="product-list">
+                    <a class="btn btn-theme btn-title-more" href="/Products/-5">دیدن همه</a>
+                    <h4 class="block-title"><span>محصولات جدید</span></h4>
+                    @Html.Action("NewsProducts", "Product")
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /PAGE -->
+<section class="page-section">
+    <div class="container">
+        @Html.Action("AdsRow3", "Ads")
+    </div>
+</section>

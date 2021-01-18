@@ -1,0 +1,66 @@
+﻿@model IEnumerable<MalekServer3.Models.TblClientProductRel>
+@{
+    ViewBag.Title = "سابقه خرید";
+}
+
+<div class="clipped column uk-margin-top uk-margin-auto">
+    <label>خرید های شما</label>
+    <hr class="uk-margin-small-top " />
+</div>
+<content id="cartTable" class="uk-card clipped uk-margin-bottom">
+    <table class="history uk-table uk-table-striped uk-margin-small-top">
+        <thead>
+            <tr>
+                <th>
+                    شماره فاکتور
+                </th>
+                <th>
+                    تاریخ خرید
+                </th>
+                <th>
+                    قیمت کل
+                </th>
+                <th>
+                    وضعیت
+                </th>
+                <th>
+                    مشاهده
+                </th>
+            </tr>
+        </thead>
+        <tbody id="tBody">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.FactorId</td>
+                    <td>@item.Date.ToShamsi()</td>
+                    <td>@item.SumFactor</td>
+                    @if (@item.IsFinaly)
+                    {
+                        <td>
+                            موفق
+                        </td>
+                        <td>
+                            <a href="/UserPanel/Home/NamyeshFactor/@item.FactorId">نمایش کامل فاکتور</a>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            نا موفق
+                        </td>
+                        <td>
+                        </td>
+                    }
+
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+
+        </tfoot>
+    </table>
+
+</content>
+
+<div class="space-double"></div>

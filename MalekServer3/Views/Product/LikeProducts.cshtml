@@ -1,0 +1,37 @@
+﻿@model IEnumerable<MalekServer3.Models.ObjectClass.OcProduct>
+
+@foreach (var item in Model)
+{
+    <div class="media">
+
+        <a class="pull-right" data-gal="prettyPhoto" href="~/Resources/Images/@item.images[0].Image">
+            <img src="~/Resources/Images/@item.images[0].Image" alt="" style="max-width:100px;" />
+            <span class="media-object"></span>
+        </a>
+        <div class="media-body">
+            <h4 class="caption-title"><a  style="font-family:'BYekan+ Bold';" href="/ViewProduct/@item.id/@item.Name.Replace(" ","-")">@item.Name</a></h4>
+            <div class="rating">
+                @{
+                    decimal raiting = Math.Round((decimal)item.Raiting / 20);
+                }
+                @for (int i = 0; i < 5 - raiting; i++)
+                {
+                    <span class="star"></span>
+                }
+                @for (int i = 0; i < raiting; i++)
+                {
+                    <span class="star active"></span>
+                }
+
+            </div>
+            @if (item.Discount != 0)
+            {
+                <div class="price"><ins>@item.AfterDiscount.ToString("#,0") ریال</ins> <del>@item.Price.ToString("#,0") ریال</del></div>
+            }
+            else
+            {
+                <div class="price"><ins>@item.Price.ToString("#,0") ریال</ins> </div>
+            }
+        </div>
+    </div>
+}

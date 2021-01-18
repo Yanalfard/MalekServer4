@@ -1,0 +1,70 @@
+﻿@model IEnumerable<MalekServer3.Models.ViewModel.ShopCartViewModel>
+<div class="row orders">
+    <div class="col-md-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>عکس</th>
+                    <th>نام</th>
+                    <th>تعداد</th>
+                    <th>قیمت</th>
+                    <th>قیمت کل</th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="image"><a class="media-link" href="#"><i class="fa fa-plus"></i><img class="thumbnail" style="max-width:50px;" src="~/Resources/Images/@item.ImageName" alt="" /></a></td>
+                        <td class="description" style="font-size:14px;">
+                            @item.Title
+                        </td>
+                        <td class="quantity">
+                            <p>
+                                <input name="points" min="1" max="30" step="1" value="@item.Count" onchange="commandOrder(@item.ProductID,$(this).val())" type="number">
+                            </p>
+                        </td>
+                        <td class="quantity">@item.Price.ToString("#,0")</td>
+                        <td class="total">@item.Sum.ToString("#,0")</td>
+                        <td class="total"><a href="#" onclick="commandOrder(@item.ProductID,0)"><i class="fa fa-close"></i></a></td>
+                    </tr>
+
+                }
+
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td class="description">جمع کل:</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="total" id="PriceSum">@Model.Sum(p => p.Sum).ToString("#,0") ريال</td>
+                </tr>
+            </tfoot>
+        </table>
+        @if (Model.Any())
+        {
+
+            <div class="col-md-12">
+                <div class="shopping-cart">
+                    <table>
+                        <tfoot>
+                            <tr>
+                                <td>قیمت کل:</td>
+                                <td id="FinalPricehid">@Model.FirstOrDefault().SumFinal.ToString("#,0") ريال</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <form action="/FinalShopCart" method="post">
+                        <button class="btn btn-theme btn-theme-dark btn-block">تکمیل خرید </button>
+                    </form>
+                </div>
+            </div>
+        }
+
+    </div>
+  
+</div>

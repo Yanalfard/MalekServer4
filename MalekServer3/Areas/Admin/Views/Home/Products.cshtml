@@ -1,0 +1,224 @@
+﻿
+@{
+    ViewBag.Title = "محصولات";
+}
+<link href="/Styles/UIKit/uikit.min.css" rel="stylesheet" />
+<link href="~/Styles/Tables.min.css" rel="stylesheet" />
+
+
+<div style="margin-top:80px;" class="text-center">
+    <form class="text-center" style="margin:0 auto;display:block;width:50%">
+        <input type="tel" id="searchText" class="uk-input" />
+        <a onclick="searchProducts()" style="display:block;width:100%;" class="uk-button uk-button-primary uk-button-small " >جستوجو</a>
+    </form>
+</div>
+<table dir="rtl" class="uk-margin-small-right uk-table .uk-table-hover uk-table-middle uk-table-divider uk-table uk-table-striped ">
+    <thead>
+        <tr>
+            <th>آی دی</th>
+            <th>نام محصول</th>
+            <th>قیمت</th>
+            <th>تغیر قیمت</th>
+            <th>تخفیف</th>
+            <th>تغیر تخفیف</th>
+            <th>امتیاز</th>
+            <th>تغیر امتیاز</th>
+            <th>زمان ثبت در سیستم</th>
+            <th>تعداد</th>
+            <th> تغیر تعداد</th>
+        </tr>
+    </thead>
+    <tbody id="tbody" class="list-wrapper">
+        @Html.Action("ListProducts")
+    </tbody>
+</table>
+<div id="pagination-container" style="overflow:hidden!important"></div>
+
+
+<style>
+    /*Paging*/
+
+    .list-wrapper {
+        padding: 15px;
+        overflow: hidden !important;
+    }
+
+    .list-item {
+        border: 1px solid #EEE;
+        background: #FFF;
+        margin-bottom: 10px;
+        padding: 10px;
+        box-shadow: 0px 0px 10px 0px #EEE;
+        overflow: hidden !important;
+    }
+
+        .list-item h4 {
+            color: #FF7182;
+            font-size: 18px;
+            margin: 0 0 5px;
+            overflow: hidden !important;
+        }
+
+        .list-item p {
+            margin: 0;
+            overflow: hidden !important;
+        }
+
+    .simple-pagination ul {
+        margin: 0 0 20px;
+        padding: 0;
+        list-style: none;
+        text-align: center;
+        overflow: hidden !important;
+    }
+
+    .simple-pagination li {
+        display: inline-block;
+        margin-right: 5px;
+        overflow: hidden !important;
+    }
+
+        .simple-pagination li a,
+        .simple-pagination li span {
+            color: #666;
+            overflow: hidden !important;
+            padding: 5px 10px;
+            text-decoration: none;
+            border: 1px solid #EEE;
+            background-color: #FFF;
+            box-shadow: 0px 0px 10px 0px #EEE;
+        }
+
+    .simple-pagination .current {
+        color: #FFF;
+        background-color: #007ACC;
+        border-color: #007ACC;
+        overflow: hidden !important;
+    }
+
+    .simple-pagination .prev.current,
+    .simple-pagination .next.current {
+        background: #007ACC;
+        overflow: hidden !important;
+    }
+</style>
+@section Scripts{
+    <script src="~/Scripts/PagingJs/jquery.simplePagination.js"></script>
+    <script src="~/Scripts/MvcJs/Paging.js"></script>
+
+    <script src="~/Scripts/Admin/Products.js"></script>
+    <script>
+        function searchProducts() {
+            if ($("#searchText").val() == "") {
+                alert(' جستوجو خالیست');
+                return false;
+            }
+            $.ajax({
+                type: "POST",
+                data: {
+                    search: $("#searchText").val(),
+                },
+                url: "/Admin/Home/SearchProducts",
+                success: function (response) {
+                    $("#overlay").fadeOut();
+                    $('#tbody').html(response);
+                },
+                error: function (response) {
+                    $("#overlay").fadeOut();
+                    alert("خطا در ثبت اطلاعات لطفا بعدا امتحان کنید"); //
+                }
+            });
+        }
+        function updatePrice(id) {
+            if ($("#price_" + id).val() == "") {
+                alert(' قیمت خالیست');
+                return false;
+            }
+            $.ajax({
+                type: "POST",
+                data: {
+                    id: id,
+                    Price: $("#price_" + id).val(),
+                },
+                url: "/Admin/Home/UpdatePrice",
+                success: function (response) {
+                    $("#overlay").fadeOut();
+
+                    $('#tbody').html(response);
+                },
+                error: function (response) {
+                    $("#overlay").fadeOut();
+                    alert("خطا در ثبت اطلاعات لطفا بعدا امتحان کنید"); //
+                }
+            });
+        }
+        function updateCount(id) {
+            if ($("#count_" + id).val() == "") {
+                alert(' تعداد خالیست');
+                return false;
+            }
+            $.ajax({
+                type: "POST",
+                data: {
+                    id: id,
+                    Count: $("#count_" + id).val(),
+                },
+                url: "/Admin/Home/UpdateCount",
+                success: function (response) {
+                    $("#overlay").fadeOut();
+
+                    $('#tbody').html(response);
+                },
+                error: function (response) {
+                    $("#overlay").fadeOut();
+                    alert("خطا در ثبت اطلاعات لطفا بعدا امتحان کنید"); //
+                }
+            });
+        }
+        function updateRaiting(id) {
+            if ($("#raiting_" + id).val() == "") {
+                alert(' امتیاز خالیست');
+                return false;
+            }
+            $.ajax({
+                type: "POST",
+                data: {
+                    id: id,
+                    Raiting: $("#raiting_" + id).val(),
+                },
+                url: "/Admin/Home/UpdateRaiting",
+                success: function (response) {
+                    $("#overlay").fadeOut();
+                    $('#tbody').html(response);
+                },
+                error: function (response) {
+                    $("#overlay").fadeOut();
+                    alert("خطا در ثبت اطلاعات لطفا بعدا امتحان کنید"); //
+                }
+            });
+        }
+        function updateDiscount(id) {
+            if ($("#discount_" + id).val() == "") {
+                alert(' تخفیف خالیست');
+                return false;
+            }
+            $.ajax({
+                type: "POST",
+                data: {
+                    id: id,
+                    Discount: $("#discount_" + id).val(),
+                },
+                url: "/Admin/Home/UpdateDiscount",
+                success: function (response) {
+                    $("#overlay").fadeOut();
+                    $('#tbody').html(response);
+                },
+                error: function (response) {
+                    $("#overlay").fadeOut();
+                    alert("خطا در ثبت اطلاعات لطفا بعدا امتحان کنید"); //
+                }
+            });
+        }
+    </script>
+
+}

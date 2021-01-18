@@ -1,0 +1,348 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="~/favicon.ico">
+    <link rel="shortcut icon" href="~/favicon.ico">
+
+    <!-- CSS Global -->
+    <link href="~/Style/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Style/assets/plugins/bootstrap/css/bootstrap-rtl.min.css" rel="stylesheet">
+    <link href="~/Style/assets/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet">
+    <link href="~/Style/assets/plugins/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/Style/assets/plugins/prettyphoto/css/prettyPhoto.css" rel="stylesheet">
+    <link href="~/Style/assets/plugins/owl-carousel2/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="~/Style/assets/plugins/owl-carousel2/assets/owl.theme.default.min.css" rel="stylesheet">
+    <link href="~/Style/assets/plugins/animate/animate.min.css" rel="stylesheet">
+
+    <!-- Theme CSS -->
+    <link href="~/Style/assets/css/theme.css" rel="stylesheet">
+    @*<link href="~/Style/assets/css/theme-green-1.css" rel="stylesheet" id="theme-config-link">*@
+
+    <!-- Head Libs -->
+    <script src="~/Style/assets/plugins/modernizr.custom.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--[if lt IE 9]>
+    <script src="~/Style/assets/plugins/iesupport/html5shiv.js"></script>
+    <script src="~/Style/assets/plugins/iesupport/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body id="home" class="wide">
+    @*<div id="preloader">
+            <div id="preloader-status">
+                <div class="spinner">
+                    <div class="rect1"></div>
+                    <div class="rect2"></div>
+                    <div class="rect3"></div>
+                    <div class="rect4"></div>
+                    <div class="rect5"></div>
+                </div>
+                <div id="preloader-title">لطفا اندکی صبر کنید</div>
+            </div>
+        </div>*@
+    <!-- /PRELOADER -->
+    <!-- WRAPPER -->
+    <div class="wrapper">
+
+        <!-- Popup: Shopping cart items -->
+        <div class="modal fade popup-cart" id="popup-cart" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="container" id="showCartMenu">
+                    @Html.Action("ShowCart", "ShopCart", new { area = "" })
+                </div>
+            </div>
+        </div>
+        <!-- /Popup: Shopping cart items -->
+        <!-- Header top bar -->
+        <div class="top-bar">
+            <div class="container">
+                <div class="top-bar-left">
+                    <ul class="list-inline">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="icon-user"><a href="/Account/LogPage/@User.Identity.Name.Split('|')[1]"><img src="~/Style/assets/img/icon-1.png" alt="" /> <span>@User.Identity.Name.Split('|')[0]</span></a></li>
+                            <li class="icon-user"><a href="/LogOff"><i class="fa fa-sign-out"></i> <span>خروج</span></a></li>
+                        }
+                        else
+                        {
+                            <li class="icon-user"><a href="/Login"><img src="~/Style/assets/img/icon-1.png" alt="" /> <span>ورود</span></a></li>
+                            <li class="icon-form"><a href="/Register"><img src="~/Style/assets/img/icon-2.png" alt="" /> <span>عضو سایت نیستید؟ <span class="colored">ثبت نام</span></span></a></li>
+                        }
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+        <!-- /Header top bar -->
+        <!-- HEADER -->
+        <header class="header">
+            <div class="header-wrapper">
+                <div class="container">
+                    <div class="logo">
+                        <a href="/"><img src="~/Resources/Vector/Logo.svg" height="48" width="110" alt="arta Shop" /></a>
+                    </div>
+                    <div class="header-search">
+                        <form action="/Search" method="get">
+                            <input class="form-control" name="q" type="text" placeholder="جستجو ..." />
+                            <button><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+                    <div class="header-cart">
+                        <div class="cart-wrapper">
+                            <a href="index.html#" class="btn btn-theme-transparent" data-toggle="modal" data-target="#popup-cart"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs"> <span id="shopCart">0</span> تعداد  </span></a>
+
+                            <!-- Mobile menu toggle button -->
+                            <a href="#" class="menu-toggle btn btn-theme-transparent"><i class="fa fa-bars"></i></a>
+                            <!-- /Mobile menu toggle button -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="navigation-wrapper">
+                <div class="container">
+                    <!-- Navigation -->
+                    <nav class="navigation header-nav-5 closed clearfix">
+                        <a href="#" class="menu-toggle-close btn"><i class="fa fa-times"></i></a>
+                        <ul class="nav sf-menu">
+                            <li>
+                                <a href="#">دسته بندی </a>
+                                <ul>
+                                    @Html.Action("Categorys", "Category", new { area = "" })
+                                </ul>
+                            </li>
+                            <li>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    if (User.Identity.Name.Split('|')[1] != "3")
+                                    {
+                                        <a href="/UserPanel/Home/Order">
+                                            استعلام قیمت/کالا
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="/Admin/Order/Orders">
+                                            مشاهده سفارش های آنلاین
+                                        </a>
+                                    }
+                                }
+                                else if (User.Identity.IsAuthenticated == false)
+                                {
+                                    <a href="/Login">
+                                        استعلام قیمت/کالا
+                                    </a>
+                                }
+                            </li>
+                            <li><a href="/Products/-1">محصولات جدید</a></li>
+                            <li><a href="/Products/-2">محصولات ویژه </a></li>
+                            <li><a href="/Blogs">مقاله ها</a></li>
+                            <li><a href="/ContactUs">تماس با ما</a></li>
+                        </ul>
+                    </nav>
+                    <!-- /Navigation -->
+                </div>
+            </div>
+        </header>
+        <!-- /HEADER -->
+        <!-- CONTENT AREA -->
+        <div class="content-area">
+
+            @RenderBody()
+
+
+        </div>
+        <!-- /CONTENT AREA -->
+        <!-- FOOTER -->
+        <footer class="footer">
+            @*<div class="footer-icons frow">
+                    <div class="icons-container frow">
+                        <div class="fcol">
+                            <img src="~/Resources/Vector/Footer/support.svg" height="64" width="64" />
+                            <span class="h6">پشتیبانی مطمئن</span>
+                        </div>
+                        <div class="fcol">
+                            <img src="~/Resources/Vector/Footer/target.svg" height="64" width="64" />
+                            <span class="h6">خرید هدفمند</span>
+                        </div>
+                        <div class="fcol">
+                            <img src="~/Resources/Vector/Footer/money.svg" height="64" width="64" />
+                            <span class="h6">پرداخت مطمئن</span>
+                        </div>
+                        <div class="fcol">
+                            <img src="~/Resources/Vector/Footer/box.svg" height="64" width="64" />
+                            <span class="h6">ارسال در کمترین زمان</span>
+                        </div>
+                    </div>
+                </div>*@
+            <div class="footer-widgets">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                            <img src="~/Resources/Vector/Footer/support.svg" height="64" width="64" />
+                            <span class="h6">پشتیبانی مطمئن</span>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                            <img src="~/Resources/Vector/Footer/target.svg" height="64" width="64" />
+                            <span class="h6">خرید هدفمند</span>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                            <img src="~/Resources/Vector/Footer/money.svg" height="64" width="64" />
+                            <span class="h6">پرداخت مطمئن</span>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                            <img src="~/Resources/Vector/Footer/box.svg" height="64" width="64" />
+                            <span class="h6">ارسال در کمترین زمان</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="footer-widgets">
+                <div class="container">
+                    <div class="row">
+
+
+
+
+                        <div class="col-md-3">
+                            <div class="widget">
+                                <h4 class="widget-title">درباره ما</h4>
+                                <p dir="rtl">
+                                    با توجه به گسترش روز افزون
+                                    تجارت الکترونیک و نیاز مشتریان
+                                    به دسترسی سریع به قیمت
+                                    کالاهای دیجیتال بر آن شدیم وب
+                                    سایت اطلاع رسانی و فروش آنلاین
+                                    ملک سرور را راه اندازی کنیم.
+                                </p>
+                                <label>ساعات کاری</label>
+                                <p dir="rtl">
+                                    شنبه تا چهارشنبه، 9:30 الی 17:30 و پنجشنبه 9:30 الی 13:30
+                                </p>
+
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="widget">
+                                <h4 class="widget-title">ارتباط با ما</h4>
+                                <div class="column" dir="rtl">
+                                    <h4 class="text-muted" style="text-align:right" dir="rtl"> 021-88940037 </h4>
+                                    <h4 class="text-muted" dir="rtl">09190995384</h4>
+                                </div>
+                                <br />
+                                <label>آدرس</label>
+                                <address>
+                                    تهران، خیابان ولیعصر، نرسیده به میدان ولیعصر، خیابان فیروزه، پلاک32 ،واحد8
+                                </address>
+                                <ul class="social-icons">
+                                    <li><a href="https://t.me/malekserver" class="telegram"><i class="fa fa-telegram"></i></a></li>
+                                    <li><a href="https://api.whatsapp.com/send/?phone=989190995384&text&app_absent=0" class="whatsapp"><i class="fa fa-whatsapp"></i></a></li>
+                                    <li><a href="https://www.instagram.com/malekserver/" class="instagram"><i class="fa fa-instagram"></i></a></li>
+                                    <li><a href="mailto:noreplaymalekserver@gmail.com" class="email"><i class="fa fa-envelope"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="widget widget-categories">
+                                <h4 class="widget-title"> لینک های مفید </h4>
+                                <ul>
+                                    <li><a href="/">خانه</a></li>
+                                    <li><a href="/Login">ورود</a></li>
+                                    <li><a href="/Register">ثبت نام </a></li>
+                                    <li><a href="/ShopCart">سبد خرید </a></li>
+                                    <li><a href="/BLogs"> مقالات</a></li>
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="widget widget-tag-cloud">
+                                <h4 class="widget-title">برچسپ های موارد</h4>
+                                <ul>
+                                    <li><a href="#">سی پی یو</a></li>
+                                    <li><a href="#">سرور</a></li>
+                                    <li><a href="#">رم سرور</a></li>
+                                    <li><a href="#">کارت شبکه</a></li>
+                                    <li><a href="#">ملک سرور</a></li>
+                                    <li><a href="#">تجارت الکترونیک</a></li>
+                                    <li><a href="#">تامین کننده</a></li>
+                                    <li><a href="#">فروشگاه</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="footer-meta">
+                    <div class="container">
+                        <div class="row">
+
+                            <div class="col-sm-6">
+                                <div class="copyright">
+                                    کلیه حقوق این سایت برای شرکت ملک سرور محفوظ است -طراحی و توسعه توسط
+                                    <a href="https://arvintavco.com">ایده پرداز آروین تاو</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- /FOOTER -->
+
+        <div id="to-top" class="to-top"><i class="fa fa-angle-up"></i></div>
+
+
+    </div>
+    <!-- /WRAPPER -->
+    <!-- JS Global -->
+    <script src="~/Style/assets/plugins/jquery/jquery-1.11.1.min.js"></script>
+    <script src="~/Style/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Style/assets/plugins/bootstrap-select/js/bootstrap-select.min.js"></script>
+    <script src="~/Style/assets/plugins/superfish/js/superfish.min.js"></script>
+    <script src="~/Style/assets/plugins/prettyphoto/js/jquery.prettyPhoto.js"></script>
+    <script src="~/Style/assets/plugins/owl-carousel2/owl.carousel.min.js"></script>
+    <script src="~/Style/assets/plugins/jquery.sticky.min.js"></script>
+    <script src="~/Style/assets/plugins/jquery.easing.min.js"></script>
+    <script src="~/Style/assets/plugins/jquery.smoothscroll.min.js"></script>
+
+    <!-- JS Page Level -->
+    <script src="~/Style/assets/js/theme.js"></script>
+    <!--[if (gte IE 9)|!(IE)]><!-->
+    <script src="~/Style/assets/plugins/jquery.cookie.js"></script>
+    @*<script src="~/Style/assets/js/theme-config.js"></script>*@
+    <!--<![endif]-->
+
+    <script src='https://www.google.com/recaptcha/api.js?hl=fa'></script>
+
+
+    <script>
+        $(function () {
+            countShopCart();
+            updateShopCart();
+        });
+
+        function countShopCart() {
+            $.get("/Api/Shop", function (res) {
+                $("#shopCart").html(res);
+            });
+        }
+
+        function AddToCart(id) {
+            $.get("/Api/Shop/" + id, function (res) {
+                $("#shopCart").html(res);
+                updateShopCart();
+            });
+        }
+        function updateShopCart() {
+            $("#showCartMenu").load("/ShopCart/ShowCart");
+        }
+    </script>
+    @RenderSection("Scripts", false)
+</body>
+</html>

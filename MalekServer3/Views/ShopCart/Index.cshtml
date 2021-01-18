@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "فاکتور";
+}
+
+<!-- PAGE -->
+<section class="page-section color">
+    <div class="container" id="showOrder">
+        @Html.Action("Order2")
+    </div>
+</section>
+<!-- /PAGE -->
+<!-- /PAGE -->
+
+<script>
+    function commandOrder(id, count) {
+        $.ajax({
+            url: "/ShopCart/CommandOrder2/" + id,
+            type: "Get",
+            data: { count: count }
+        }).done(function (res) {
+            $("#showOrder").html(res);
+            countShopCart();
+            updateShopCart();
+        });
+    }
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    function AddDiscount() {
+        if ($("#DiscountName").val() == "") {
+            alert(' کد تخفیف خالیست');
+            return false;
+        }
+        $.ajax({
+            url: "/ShopCart/CheckDiscount/",
+            type: "POST",
+            data: {
+                name: $("#DiscountName").val(),
+            },
+            success: function (response) {
+                if (response.success) {
+                    alert("کد تخفیف موجود نیست");
+                    //var NumberPrice = $('#PriceSum').val();
+                    //var price = parseInt(NumberPrice);
+                    //var percent = parseInt(response.responseText);
+                    //var final = price - Math.floor((price * percent) / 100);
+                    //$('#FinalPricehid').html(numberWithCommas(final));
+                    //$('#PriceSum').val(final);
+                    //$('#Discount').val(percent);
+                    //$('#listCompare').html(response);
+                    //$('.AddDiscount').hide();
+                } else {
+                    $('#showOrder').html(response);
+                    $('#DiscountName').val("");
+                    $('.AddDiscount').hide();
+                }
+            },
+            error: function (response) {
+                alert("کد تخفیف موجود نیست");
+            }
+        });
+    }
+</script>

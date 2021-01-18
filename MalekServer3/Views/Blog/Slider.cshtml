@@ -1,0 +1,31 @@
+﻿@model IEnumerable<MalekServer3.Models.TblAd>
+<section class="page-section no-padding slider">
+    <div class="container full-width">
+
+        <div class="main-slider">
+            <div class="owl-carousel" id="main-slider">
+                @foreach (var item in Model)
+                {
+                    <div class="item slide1">
+                        <img class="slide-img" src="~/Resources/Images/@item.Image" alt="" />
+                        <div class="caption">
+                            <div class="container">
+                                <div class="div-table">
+                                    <div class="div-cell">
+                                        <div class="caption-content">
+                                            <h2 class="caption-title">بزرگترین</h2>
+                                            <h3 class="caption-subtitle">فروش</h3>
+                                            <p class="caption-text">
+                                                <a class="btn btn-theme" href="index.html#">همین حالا خرید کنید</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
