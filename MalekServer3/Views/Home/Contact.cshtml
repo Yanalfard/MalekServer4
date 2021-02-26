@@ -19,13 +19,13 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", placeholder = "موضوع" } })
+                                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", placeholder = "ایمیل" } })
                                 @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                @Html.EditorFor(model => model.Body, new { htmlAttributes = new { @class = "form-control", placeholder = "موضوع", style = "min-height:100px;" } })
+                                @Html.EditorFor(model => model.Body, new { htmlAttributes = new { @class = "form-control", placeholder = "متن", style = "min-height:100px;" } })
                                 @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
                             </div>
                         </div>
