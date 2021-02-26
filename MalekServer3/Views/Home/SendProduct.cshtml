@@ -1,0 +1,20 @@
+﻿@model MalekServer3.Models.TblConfig
+@{
+    ViewBag.Title = "نحوه ارسال";
+}
+<section class="page-section breadcrumbs">
+    <div class="container">
+        <div class="page-header">
+            <h1>نحوه ارسال</h1>
+        </div>
+        <ul class="breadcrumb"></ul>
+    </div>
+</section>
+
+<!-- PAGE -->
+<section class="page-section color">
+    <div class="container">
+        @Html.Raw(Model.SendProduct)
+    </div>
+</section>
+<!-- /PAGE -->

@@ -1,0 +1,45 @@
+﻿@model MalekServer3.Models.ViewModel.ContactViewModel
+<!-- PAGE -->
+<section class="page-section color" id="loginForm">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-12">
+                <h3 class="block-title"><span> ارتباط با ما</span></h3>
+                @using (Ajax.BeginForm("Contact", "Home", new AjaxOptions() { HttpMethod = "POST", OnFailure = "doneModal('Modal-Show')", OnSuccess = "LoadingEnd('#loginForm')", UpdateTargetId = "loginForm" }, htmlAttributes: new { @id = "" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="row  text-center">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.TellNo, new { htmlAttributes = new { @class = "form-control", placeholder = "شماره تلفن" } })
+                                @Html.ValidationMessageFor(model => model.TellNo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", placeholder = "موضوع" } })
+                                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.Body, new { htmlAttributes = new { @class = "form-control", placeholder = "موضوع", style = "min-height:100px;" } })
+                                @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3 ">
+                            <input type="submit" value="ارسال" class="btn btn-primary btn-theme btn-block" />
+                        </div>
+                    </div>
+
+                }
+
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+</section>
+
+<!-- /PAGE -->

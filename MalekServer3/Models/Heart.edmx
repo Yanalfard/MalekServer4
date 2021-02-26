@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MalekServerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MalekServerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -100,6 +100,25 @@
           <Property Name="Body" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Date" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="IsValid" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblConfig">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AboutUs" Type="nvarchar(max)" />
+          <Property Name="ContactUs" Type="nvarchar(max)" />
+          <Property Name="SendProduct" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="TblContact">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Body" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="TellNo" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="IsSeen" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="TblDiscount">
           <Key>
@@ -429,6 +448,8 @@
           <EntitySet Name="TblClient" EntityType="Self.TblClient" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblClientProductRel" EntityType="Self.TblClientProductRel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblComment" EntityType="Self.TblComment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblConfig" EntityType="Self.TblConfig" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblContact" EntityType="Self.TblContact" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblDiscount" EntityType="Self.TblDiscount" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblImage" EntityType="Self.TblImage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblKeyword" EntityType="Self.TblKeyword" Schema="dbo" store:Type="Tables" />
@@ -508,8 +529,7 @@
             <End Role="TblProductPropertyRel" EntitySet="TblProductPropertyRel" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MalekServerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1049,7 +1069,28 @@
             <End Role="TblProperty" EntitySet="TblProperties" />
             <End Role="TblProductPropertyRel" EntitySet="TblProductPropertyRels" />
           </AssociationSet>
+          <EntitySet Name="TblConfigs" EntityType="MalekServerModel.TblConfig" />
+          <EntitySet Name="TblContacts" EntityType="MalekServerModel.TblContact" />
         </EntityContainer>
+        <EntityType Name="TblConfig">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AboutUs" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContactUs" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SendProduct" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TblContact">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Body" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="TellNo" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="IsSeen" Type="Boolean" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1256,6 +1297,27 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblConfigs">
+            <EntityTypeMapping TypeName="MalekServerModel.TblConfig">
+              <MappingFragment StoreEntitySet="TblConfig">
+                <ScalarProperty Name="SendProduct" ColumnName="SendProduct" />
+                <ScalarProperty Name="ContactUs" ColumnName="ContactUs" />
+                <ScalarProperty Name="AboutUs" ColumnName="AboutUs" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblContacts">
+            <EntityTypeMapping TypeName="MalekServerModel.TblContact">
+              <MappingFragment StoreEntitySet="TblContact">
+                <ScalarProperty Name="IsSeen" ColumnName="IsSeen" />
+                <ScalarProperty Name="TellNo" ColumnName="TellNo" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

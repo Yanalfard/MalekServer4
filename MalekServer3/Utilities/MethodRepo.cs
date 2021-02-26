@@ -14,10 +14,7 @@ namespace MalekServer3.Utilities
         public static bool CheckRechapcha(FormCollection form)
         {
             string urlToPost = "https://www.google.com/recaptcha/api/siteverify";
-            //< !--Site-- >
-            string secretKey = "6LevZMIZAAAAAEo3AIKVdQNkbobs8eHHzxOMQNdl"; // change this
-            //< !--localhost-- >
-            //string secretKey = "6Ld_XsIZAAAAAL8yHVP2OmPE0LYumkEuPWDq1-rS"; // change this //
+            string secretKey = "6LespWgaAAAAAD-FV6JB1-2NDOEQHy47Wx2R6XLB"; // change this
             string gRecaptchaResponse = form["g-recaptcha-response"];
             var postData = "secret=" + secretKey + "&response=" + gRecaptchaResponse;
             // send post data

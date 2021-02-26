@@ -26,8 +26,8 @@
         <!-- Nav Items -->
         <div class="bottom row">
             @*<a class="menu-item" href="">
-                <span class="uk-icon" uk-icon="icon: menu"></span>
-            </a>*@
+            <span class="uk-icon" uk-icon="icon: menu"></span>
+        </a>*@
             <a class="menu-item" href="/LogOff">
                 <span class="uk-icon" uk-icon="icon: sign-out"></span>
             </a>
@@ -113,7 +113,22 @@
                 @*<span class="uk-icon" uk-icon="icon: hashtag"></span>*@
                 <span class="text">فروش آنلاین</span>
             </a>
-
+            <a href="/Admin/Home/" class="menu-item">
+                @*<span class="uk-icon" uk-icon="icon: file-text"></span>*@
+                <span class="text">تماس با ما</span>
+            </a>
+            <div mode="click" delay-hide="400"
+                 uk-drop="pos: bottom-right;duration: 300"
+                 class="uk-navbar-dropdown uk-position-fixed">
+                <div class="uk-dropdown-grid uk-child-width-1-2@m" uk-grid>
+                    <ul class="uk-nav uk-dropdown-nav">
+                        <li><a href="/Admin/About/AboutUs">تماس با ما </a></li>
+                        <li><a href="/Admin/About/Rules">قوانین سایت </a></li>
+                        <li><a href="/Admin/About/SendProduct"> نحوه ارسال</a></li>
+                        <li><a href="/Admin/About/Contact"> فرم تماس با ما </a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </nav>
 

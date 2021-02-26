@@ -1,0 +1,45 @@
+﻿@model MalekServer3.Models.TblConfig
+@{
+    ViewBag.Title = "  تماس با ما";
+}
+
+
+
+<link href="/Styles/Blog.min.css" rel="stylesheet" />
+
+<div class="space-nav-bottom"></div>
+<!-- #endregion -->
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.id)
+    @Html.HiddenFor(model => model.SendProduct)
+    @Html.HiddenFor(model => model.ContactUs)
+    <div class="blog-adder uk-margin-medium-top uk-margin-medium-bottom    uk-margin-auto uk-card">
+
+        <h3 class="uk-margin-bottom">
+            تماس با ما
+        </h3>
+        @Html.TextAreaFor(model => model.AboutUs, new { htmlAttributes = new { @class = "" } })
+        @Html.ValidationMessageFor(model => model.AboutUs, "", new { @class = "text-danger" })
+
+
+        <hr class="uk-divider-icon uk-margin-medium-top" />
+
+        <div class="row ">
+            <button class="btn btn-primary uk-button uk-button-primary">تایید</button>
+        </div>
+    </div>
+}
+
+
+@section Scripts{
+
+    <script src="~/Scripts/ckeditor/ckeditor.js"></script>
+    <script src="~/Scripts/ckeditor/adapters/jquery.js"></script>
+    <script>
+        $(function () {
+            $('#AboutUs').ckeditor();
+        });
+    </script>
+}

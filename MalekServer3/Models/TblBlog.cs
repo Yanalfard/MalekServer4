@@ -21,14 +21,14 @@ namespace MalekServer3.Models
             this.TblBlogCommentRels = new HashSet<TblBlogCommentRel>();
             this.TblBlogKeywordRels = new HashSet<TblBlogKeywordRel>();
         }
-    
+
         public int id { get; set; }
         public string MainImage { get; set; }
         public string Title { get; set; }
         [AllowHtml]
         public string Body { get; set; }
         public int LikeCount { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TblBlogCommentRel> TblBlogCommentRels { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
