@@ -1,0 +1,54 @@
+﻿@model IEnumerable<MalekServer3.Models.TblContact>
+
+@{
+    ViewBag.Title = "فرم تماس با ما";
+}
+<!-- UIkit CSS -->
+<link href="/Styles/UIKit/uikit.min.css" rel="stylesheet" />
+<link href="~/Styles/Tables.min.css" rel="stylesheet" />
+<table dir="rtl" class="uk-margin-small-right uk-table .uk-table-hover uk-table-middle uk-table-divider uk-table uk-table-striped ">
+    <thead>
+        <tr>
+            <th>شماره فرستنده</th>
+            <th>ایمیل</th>
+            <th>متن</th>
+            <th>عملیات</th>
+        </tr>
+    </thead>
+    <tbody id="tbody">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.TellNo</td>
+                <td>@item.Title</td>
+                <td>@item.Body</td>
+                <td>
+                    <a onclick="DeleteContact(@item.id)" href="#" uk-icon="icon: trash"></a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+@section Scripts{
+    <script src="~/Scripts/Admin/Comments.js"></script>
+
+    <script>
+        function DeleteContact(id) {
+            if (confirm('آیا از حذف پیام  مورد نظر مطمئن هستید؟')) {
+                // Save it!
+                $.ajax({
+                    /**/
+                    url: "/Admin/About/DeleteContact/" + id,
+                    /**/
+                    type: "Get",
+                }).done(function (result) {
+                    location.reload();
+                });
+
+            } else {
+                // Do nothing!
+            }
+        }
+    </script>
+}

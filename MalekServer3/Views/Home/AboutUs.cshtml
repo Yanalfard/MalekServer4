@@ -1,0 +1,52 @@
+﻿@model MalekServer3.Models.TblConfig
+@{
+    ViewBag.Title = "تماس با ما";
+}
+<section class="page-section breadcrumbs">
+    <div class="container">
+        <div class="page-header">
+            <h1>تماس با ما</h1>
+        </div>
+        <ul class="breadcrumb"></ul>
+    </div>
+</section>
+
+<!-- PAGE -->
+<section class="page-section color">
+    <div class="container">
+        @Html.Raw(Model.AboutUs)
+    </div>
+</section>
+<!-- /PAGE -->
+<div class="map" id="map" style="height:400px;width:100%"></div>
+
+<div>
+    @Html.Action("Contact")
+</div>
+
+<script src="~/Scripts/jquery-3.5.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+<script>
+    function doneSendContact(form) {
+        alert('پیام شما ارسال شد');
+        $(".form-control").val("");
+        $(".text-danger").text("");
+    }
+</script>
+<link href="~/Scripts/leaflet/leaflet.css" rel="stylesheet" />
+<script src="~/Scripts/leaflet/leaflet.js"></script>
+<script src="~/Scripts/leaflet-routing-machine.js"></script>
+<script>
+    var Lat = '35.7090111';
+    var Lon = '51.4072848';
+    var map = L.map('map').setView([Lat, Lon], 20);
+
+    L.tileLayer('https://a.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: 'ملک سرور'
+    }).addTo(map);
+    /**/
+    L.marker([Lat, Lon]).addTo(map).bindPopup('ملک سرور').openPopup();
+</script>

@@ -44,5 +44,7 @@ namespace MalekServer3.Models
         public virtual DbSet<TblProductKeywordRel> TblProductKeywordRels { get; set; }
         public virtual DbSet<TblProductPropertyRel> TblProductPropertyRels { get; set; }
         public virtual DbSet<TblProperty> TblProperties { get; set; }
+        public virtual DbSet<TblConfig> TblConfigs { get; set; }
+        public virtual DbSet<TblContact> TblContacts { get; set; }
     }
 }
