@@ -286,6 +286,7 @@
     <Content Include="Resources\Vector\Icon\starhollow.svg" />
     <Content Include="Resources\Vector\Icon\toman.svg" />
     <Content Include="Resources\Vector\Logo.svg" />
+    <Content Include="Resources\Vector\Logo111.svg" />
     <Content Include="Resources\Vector\Social\Gmail.svg" />
     <Content Include="Resources\Vector\Social\Instagram.svg" />
     <Content Include="Resources\Vector\Social\Telegram.svg" />
