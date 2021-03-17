@@ -1868,28 +1868,6 @@
     <Content Include="Style\assets\plugins\prettyphoto\js\jquery.prettyPhoto.js" />
     <Content Include="Style\assets\plugins\smooth-scrollbar.min.js" />
     <Content Include="Style\assets\plugins\superfish\js\superfish.min.js" />
-    <Content Include="View\About.html" />
-    <Content Include="View\Admin\BlogAdder.html" />
-    <Content Include="View\Admin\Blogs.html" />
-    <Content Include="View\Admin\CommentValidator.html" />
-    <Content Include="View\Admin\ProductAdder.html" />
-    <Content Include="View\Admin\PromocodeAdder.html" />
-    <Content Include="View\Blog.html" />
-    <Content Include="View\Search.html" />
-    <Content Include="View\Admin\TblClients.html" />
-    <Content Include="View\Admin\TblComments.html" />
-    <Content Include="View\Admin\TblProducts.html" />
-    <Content Include="View\User\UsCart.html" />
-    <Content Include="View\ContactUs.html" />
-    <Content Include="View\Index.html" />
-    <Content Include="View\Login.html" />
-    <Content Include="View\Product.html" />
-    <Content Include="View\Purchases.html" />
-    <Content Include="View\SignUp.html" />
-    <Content Include="View\User\UsCheckout.html" />
-    <Content Include="View\User\UsHistory.html" />
-    <Content Include="View\User\UsPrintView.html" />
-    <Content Include="View\User\UsProfile.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
