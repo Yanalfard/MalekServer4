@@ -277,6 +277,7 @@
     <Content Include="Resources\UploadEditor\20201121-15113344.jpg" />
     <Content Include="Resources\UploadEditor\20201121-15115429.jpg" />
     <Content Include="Resources\UploadEditor\20201121-15115772.jpg" />
+    <Content Include="Resources\Vector\Logo.png" />
     <Content Include="Resources\Vector\DiscountStar.svg" />
     <Content Include="Resources\Vector\Footer\box.svg" />
     <Content Include="Resources\Vector\Footer\money.svg" />
